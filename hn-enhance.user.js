@@ -3,7 +3,7 @@
 // @namespace   http://erikh.me
 // @version     0.1
 // @description Add some enhancements to Hacker News!
-// @author      youdulayo
+// @author      erik-h
 // @include     *news.ycombinator.com/*
 // @grant       none
 // ==/UserScript==
