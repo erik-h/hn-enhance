@@ -25,11 +25,19 @@
 		linkAndComment.appendChild(document.createTextNode(linkCommentText));
 		linkAndComment.addEventListener("click", function(e) {
 			e.preventDefault();
-			window.open(comments);
-			if (article !== comments) {
-				// We only want to open the article if it's not the same
-				// page as the comments
-				window.open(article);
+			var commentsWindow = window.open(comments);
+			/*
+			 * Load the article _after_ the comments; this isn't useful unless
+			 * certain extensions are in use such as Tree Style Tab, which
+			 * messes up the tab order if there isn't a delay between opening
+			 * the comments and the article
+			 */
+			commentsWindow.onload = function() {
+				if (article !== comments) {
+					// We only want to open the article if it's not the same
+					// page as the comments
+					window.open(article);
+				}
 			}
 		});
 
