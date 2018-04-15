@@ -13,11 +13,24 @@
 	// the article and comments links
 	function buildMultiLink(article, comments) {
 		var linkAndComment = document.createElement("a");
-		linkAndComment.appendChild(document.createTextNode("Link + Comments"));
+
+		var linkCommentText;
+		if (article !== comments) {
+			linkCommentText = "Link + Comments";
+		}
+		else {
+			linkCommentText = "Link = Comments";
+		}
+
+		linkAndComment.appendChild(document.createTextNode(linkCommentText));
 		linkAndComment.addEventListener("click", function(e) {
 			e.preventDefault();
 			window.open(comments);
-			window.open(article);
+			if (article !== comments) {
+				// We only want to open the article if it's not the same
+				// page as the comments
+				window.open(article);
+			}
 		});
 
 		// Use a wrapper span so we get a nice little pipe before the anchor
