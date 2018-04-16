@@ -56,7 +56,7 @@
 		var articleLink = stories[i].querySelector("td.title > a").href;
 		var comments = linkRow.querySelector("td > a[href^=item\\?id\\=]");
 
-		if (typeof comments !== "undefined") {
+		if (typeof comments !== "undefined" && comments !== null) {
 			// Append the "Link + Comments" href after the existing links
 			// subtext for the story
 			linkRow.querySelector(".subtext")
