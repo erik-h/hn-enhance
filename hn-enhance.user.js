@@ -8,13 +8,13 @@
 // @grant       none
 // ==/UserScript==
 
-(function() {
+(() => {
 	// Return a span that contains the anchor tag that will open both
 	// the article and comments links
-	function buildMultiLink(article, comments) {
-		var linkAndComment = document.createElement("a");
+	const buildMultiLink = (article, comments) => {
+		let linkAndComment = document.createElement("a");
 
-		var linkCommentText;
+		let linkCommentText;
 		if (article !== comments) {
 			linkCommentText = "Link + Comments";
 		}
@@ -23,16 +23,16 @@
 		}
 
 		linkAndComment.appendChild(document.createTextNode(linkCommentText));
-		linkAndComment.addEventListener("click", function(e) {
+		linkAndComment.addEventListener("click", e => {
 			e.preventDefault();
-			var commentsWindow = window.open(comments);
+			let commentsWindow = window.open(comments);
 			/*
 			 * Load the article _after_ the comments; this isn't useful unless
 			 * certain extensions are in use such as Tree Style Tab, which
 			 * messes up the tab order if there isn't a delay between opening
 			 * the comments and the article
 			 */
-			commentsWindow.onload = function() {
+			commentsWindow.onload = () => {
 				if (article !== comments) {
 					// We only want to open the article if it's not the same
 					// page as the comments
@@ -42,18 +42,18 @@
 		});
 
 		// Use a wrapper span so we get a nice little pipe before the anchor
-		var wrapper = document.createElement("span");
+		let wrapper = document.createElement("span");
 		wrapper.appendChild(document.createTextNode(" | "));
 		wrapper.appendChild(linkAndComment);
 		return wrapper;
 	}
 
-	var stories = document.getElementsByClassName("athing");
+	let stories = document.getElementsByClassName("athing");
 	// Loop through each story
-	for (var i = 0; i < stories.length; i++) {
-		var linkRow = stories[i].nextSibling;
+	for (const story of stories) {
+		var linkRow = story.nextSibling;
 
-		var articleLink = stories[i].querySelector("td.title > a").href;
+		var articleLink = story.querySelector("td.title > a").href;
 		var comments = linkRow.querySelector("td > a[href^=item\\?id\\=]");
 
 		if (typeof comments !== "undefined") {
