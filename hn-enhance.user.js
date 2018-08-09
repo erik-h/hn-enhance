@@ -58,7 +58,7 @@
 
 		// Only add a comments link if we actually have comments on this post
 		if (comments) {
-			// Append the "Link + Comments" href after the existing links
+			// Append the "Link + Comments" href after the existing link's
 			// subtext for the story
 			linkRow.querySelector(".subtext")
 				.appendChild(buildMultiLink(articleLink, comments.href));
